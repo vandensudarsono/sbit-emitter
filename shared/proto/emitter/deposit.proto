@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package wallet;
+
+//import "google/protobuf/timestamp.proto";
+
+option go_package =".;wallet";
+
+message DepositRequest {
+    int64 wallet_id = 1;
+    float amount = 2;
+}
+
+message DepositResponse {
+    Status status = 1;
+}
+
+message Status {
+    int32 code = 1;
+    string message_client = 2;
+}
+
+// message DetailsResponse {
+//     int64 wallet_id = 1;
+//     float balance = 2;
+//     bool above_treshold = 3;
+// }
+
+// message DetailsRequest {
+//     int64 wallet_id = 1;
+// }
+
+service SbitService {
+    rpc Deposit (DepositRequest) returns (DepositResponse);
+    //rpc Details (DetailsRequest) returns (DetailsResponse);
+}
