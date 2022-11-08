@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"sbit-emitter/infrastructure/balance"
 	"sbit-emitter/infrastructure/emitter"
 	logger "sbit-emitter/infrastructure/log"
 
@@ -12,7 +13,9 @@ import (
 func LoadConfig() {
 	readConfig()          // read config file
 	logger.InitLogger()   // init logger
+	balance.InitBalance() //init balance processor
 	emitter.InitEmitter() //init Emitter
+
 }
 
 func readConfig() {

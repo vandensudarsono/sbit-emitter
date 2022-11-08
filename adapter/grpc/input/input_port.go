@@ -3,7 +3,7 @@ package input
 import (
 	"context"
 	"sbit-emitter/domain/model"
-	"sbit-emitter/usecase"
+	ucEmitter "sbit-emitter/usecase/emitter"
 
 	pb "sbit-emitter/infrastructure/server/grpc/proto/emitter"
 
@@ -11,10 +11,10 @@ import (
 )
 
 type InputPort struct {
-	usecaseInput usecase.UsecaseInput
+	usecaseInput ucEmitter.UsecaseInput
 }
 
-func NewEmitterInputPortService(usecaseInput usecase.UsecaseInput) *InputPort {
+func NewEmitterInputPortService(usecaseInput ucEmitter.UsecaseInput) *InputPort {
 	return &InputPort{usecaseInput: usecaseInput}
 }
 

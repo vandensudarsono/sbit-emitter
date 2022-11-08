@@ -12,7 +12,7 @@ import (
 	"sbit-emitter/infrastructure/emitter"
 	logging "sbit-emitter/infrastructure/log"
 	pb "sbit-emitter/infrastructure/server/grpc/proto/emitter"
-	"sbit-emitter/usecase"
+	ucEmitter "sbit-emitter/usecase/emitter"
 	"syscall"
 
 	"github.com/spf13/viper"
@@ -49,7 +49,7 @@ func RunServer() {
 func apply(server *grpc.Server) {
 	present := output.NewEmitterOutputPortService()
 	e := emclient.NewEmitterServer(emitter.GetEmitter())
-	uc := usecase.NewEmitterInteractor(e, present)
+	uc := ucEmitter.NewEmitterInteractor(e, present)
 
 	//register a service
 	pb.RegisterSbitServiceServer(server, input.NewEmitterInputPortService(uc))

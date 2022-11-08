@@ -12,11 +12,12 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
 
 # vscode
 .vscode
 
 #.env*
+.env.yaml
 
 
