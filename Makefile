@@ -1,4 +1,4 @@
-BIN_NAME=sbit
+BIN_NAME=sbit-emitter
 
 dep:
 	@echo "> fetching dependencies..."

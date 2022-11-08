@@ -11,17 +11,22 @@ import (
 	"github.com/spf13/viper"
 )
 
-var balance *goka.Processor
+var (
+	balance *goka.Processor
+	tmc     *goka.TopicManagerConfig
+)
+
+func init() {
+	tmc = goka.NewTopicManagerConfig()
+
+	tmc.Table.Replication = 1
+	tmc.Stream.Replication = 1
+}
 
 func InitBalance() {
 	var (
 		err error
 	)
-
-	//crete config first
-	tmc := goka.NewTopicManagerConfig()
-	tmc.Table.Replication = 1
-	tmc.Stream.Replication = 1
 
 	//define group
 	group := goka.Group(viper.GetString("processor.balance.group"))

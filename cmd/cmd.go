@@ -49,8 +49,8 @@ func (c *Command) Run() {
 					Infof("starting GRPC server...")
 			},
 			Run: func(cmd *cobra.Command, args []string) {
-				grpc.RunServer()                                                              // Run GRPC server
-				fmt.Printf("error running b processor :%v\n", balance.RunBallanceProcessor()) // run balance processor
+				grpc.RunServer()               // Run GRPC server
+				balance.RunBallanceProcessor() // run balance processor
 			},
 			PostRun: func(cmd *cobra.Command, args []string) {
 				// close database connection
