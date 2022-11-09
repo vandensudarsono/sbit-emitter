@@ -2,7 +2,7 @@ package emitter
 
 import (
 	"context"
-	"fmt"
+	"sbit-emitter/domain/model"
 
 	"github.com/lovoo/goka"
 )
@@ -15,13 +15,9 @@ func NewEmitterServer(e *goka.Emitter) *EmitterServer {
 	return &EmitterServer{e: e}
 }
 
-func (em *EmitterServer) EmitMessage(ctx context.Context, key string, message interface{}) error {
-	// res, err := json.Marshal(message)
-	// if err != nil {
-	// 	return err
-	// }
-	data := fmt.Sprintf("%+v", message)
-	_, err := em.e.Emit(key, data)
+func (em *EmitterServer) EmitMessage(ctx context.Context, key string, message model.Deposit) error {
+
+	_, err := em.e.Emit(key, &message)
 
 	return err
 }

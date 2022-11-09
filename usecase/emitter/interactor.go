@@ -5,6 +5,8 @@ import (
 	emitdomain "sbit-emitter/domain/emitter"
 	"sbit-emitter/domain/model"
 	logging "sbit-emitter/infrastructure/log"
+
+	"github.com/spf13/viper"
 )
 
 type EmitterInterfactor struct {
@@ -24,7 +26,7 @@ func (e *EmitterInterfactor) AddDeposit(ctx context.Context, deposit model.Depos
 	var response model.DepositResponse
 	//send data to goka emitter
 
-	err := e.e.EmitMessage(ctx, "deposit", deposit)
+	err := e.e.EmitMessage(ctx, viper.GetString("broker.topic"), deposit)
 	if err != nil {
 		logging.WithFields(logging.Fields{"component": "usecase", "action": "add deposit"}).
 			Errorf("error emit message: %v", err)

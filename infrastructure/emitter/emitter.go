@@ -1,10 +1,11 @@
 package emitter
 
 import (
+	"fmt"
 	"log"
+	dc "sbit-emitter/internal/deposit_codec"
 
 	"github.com/lovoo/goka"
-	"github.com/lovoo/goka/codec"
 	"github.com/spf13/viper"
 )
 
@@ -12,18 +13,21 @@ var emitter *goka.Emitter
 
 func InitEmitter() {
 	var err error
-	topic := goka.Stream(viper.GetString("brocker.topic"))
+	stream := goka.Stream(viper.GetString("broker.topic"))
+	broker := []string{fmt.Sprintf("%s:%s", viper.GetString("broker.host"), viper.GetString("broker.port"))}
+
 	emitter, err = goka.NewEmitter(
-		viper.GetStringSlice("brocker.url"),
-		topic,
-		new(codec.String),
+		broker,
+		stream,
+		new(dc.DepositCodec),
 	)
 
 	if err != nil {
 		log.Panicf("error creating emitter: %v", err)
 	}
 
-	//defer emitter.Finish()
+	//ßdefer emitter.Finish()
+
 }
 
 func GetEmitter() *goka.Emitter {

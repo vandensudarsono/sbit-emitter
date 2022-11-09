@@ -19,5 +19,6 @@ vendor/
 
 #.env*
 .env.yaml
+__debug_bin
 
 

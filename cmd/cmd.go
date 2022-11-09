@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"sbit-emitter/config"
-	"sbit-emitter/infrastructure/balance"
 	"sbit-emitter/infrastructure/emitter"
 	logger "sbit-emitter/infrastructure/log"
 	"sbit-emitter/infrastructure/server/grpc"
@@ -49,12 +48,13 @@ func (c *Command) Run() {
 					Infof("starting GRPC server...")
 			},
 			Run: func(cmd *cobra.Command, args []string) {
-				grpc.RunServer()               // Run GRPC server
-				balance.RunBallanceProcessor() // run balance processor
+				grpc.RunServer() // Run GRPC server
+				//balance.RunBallanceProcessor() // run balance processor
 			},
 			PostRun: func(cmd *cobra.Command, args []string) {
 				// close database connection
 				emitter.CloseEmitter()
+
 				logger.WithFields(logger.Fields{"component": "command", "action": "grpc"}).
 					Infof("stopping GRPC server done")
 			},
